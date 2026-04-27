@@ -1,0 +1,30 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5435/ai_insights
+    username: app
+    password: secret
+
+  kafka:
+    consumer:
+      group-id: ai-insight
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+          temperature: 0.1
+      embedding:
+        options:
+          model: nomic-embed-text
+    vectorstore:
+      pgvector:
+        dimensions: 768
+        index-type: hnsw
+        distance-type: cosine_distance
+        initialize-schema: true
+        schema-validation: false

@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/transactions
+    username: app
+    password: secret
+
+  kafka:
+    consumer:
+      group-id: transaction-service

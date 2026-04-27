@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: transaction-service
+  config:
+    import: optional:configserver:http://localhost:8888
+
+logging:
+  level:
+    com.devblo.transactionservice: DEBUG
+    org.hibernate.SQL: DEBUG

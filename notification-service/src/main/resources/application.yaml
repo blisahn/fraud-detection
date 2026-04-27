@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: notification-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  datasource:
+    url: jdbc:postgresql://localhost:5434/notifications
+    username: app
+    password: secret
+
+logging:
+  level:
+    com.devblo.notificationservice: DEBUG
+    org.hibernate.SQL: DEBUG

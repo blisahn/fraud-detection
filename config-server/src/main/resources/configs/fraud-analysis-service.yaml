@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/fraud_analysis
+    username: app
+    password: secret
+
+  kafka:
+    consumer:
+      group-id: fraud-analysis

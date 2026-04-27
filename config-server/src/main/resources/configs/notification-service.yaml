@@ -1,0 +1,54 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5434/notifications
+    username: app
+    password: secret
+
+  kafka:
+    consumer:
+      group-id: notification-service
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mail@mail.com
+    password: appsecret
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+notification:
+  recipient-email: ${NOTIFICATION_RECIPIENT:fallbackmail@mail.com}
+  enabled-types: EMAIL
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      emailService:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        recordExceptions:
+          - org.springframework.mail.MailException
+          - org.springframework.mail.MailSendException
+          - java.net.ConnectException
+          - java.io.IOException
+
+  retry:
+    instances:
+      emailService:
+        maxAttempts: 3
+        waitDuration: 2s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+        retryExceptions:
+          - org.springframework.mail.MailSendException
+          - java.net.ConnectException

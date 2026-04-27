@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: ai-insight-service
+  config:
+    import: optional:configserver:http://localhost:8888
+
+logging:
+  level:
+    com.devblo.aiinsightservice: DEBUG
+    org.springframework.ai: INFO
